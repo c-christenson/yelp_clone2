@@ -65,5 +65,18 @@ feature 'restaurants' do
 
   end
 
+  context 'deleting a restaurant' do
+
+    before {Restaurant.create(name: 'KFC')}
+
+    scenario 'a user can delete a restaurant' do 
+      visit '/restaurants'
+      click_link 'Delete KFC'
+      expect(page).not_to have_content('KFC')
+      expect(page).to have_content 'Restaurant deleted succesfully'
+    end
+
+  end
+
 end
 
