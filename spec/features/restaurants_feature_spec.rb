@@ -11,7 +11,7 @@ feature 'restaurants' do
     end
   end
 
-  context 'adding a restaurant' do 
+  context 'displaying a restaurant' do 
     before do 
       Restaurant.create(name: 'KFC')
     end
@@ -21,6 +21,19 @@ feature 'restaurants' do
       expect(page).to have_content('KFC')
       expect(page).not_to have_content('No restaurants yet')
     end
+  end
+
+  context 'adding a restaurant' do
+
+    scenario 'it should have a form when add a restaurant in clicked' do 
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      expect(page).to have_content('KFC')
+      expect(page).not_to have_content('No restaurants yet')
+    end
+
   end
 
 end
